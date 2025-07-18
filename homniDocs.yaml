@@ -368,6 +368,43 @@ paths:
         "500":
           description: Internal server error
 
+  /summit/cart:
+    post:
+      tags:
+        - Summit
+      summary: Summit - Send Cart Updates
+      description: Webhook endpoint to send cart updates from Summit platform.
+      operationId: summitSendCartUpdate
+      requestBody:
+        description: Payload to send a cart update with cart information
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cartId:
+                  type: [string, number]
+                  description: ID of the cart (accepts string or number, extracts digits only)
+                  example: "cart_12345"
+                codSap:
+                  type: [string, number]
+                  description: SAP code associated with the cart (optional, accepts string or number)
+                  example: 67890
+              required:
+                - cartId
+      responses:
+        "200":
+          description: Summit cart processed successfully
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized - Invalid or missing bearer token
+        "403":
+          description: Forbidden - Access denied
+        "500":
+          description: Internal server error
+
 components:
   securitySchemes:
     BearerAuth:
