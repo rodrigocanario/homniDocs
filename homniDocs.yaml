@@ -1,0 +1,422 @@
+openapi: 3.0.4
+info:
+  title: Homni Webhook API
+  description: API documentation for the Homni application webhook endpoints.
+  version: 1.0.0
+externalDocs:
+  description: Architecture
+  url: https://www.canva.com/design/DAGmlmkqgRY/CgiWHirMvYzW_yD7pLQu1A/edit
+servers:
+  - url: http://localhost:3000/dev
+    description: Local development server
+  - url: https://wnzq02zta5.execute-api.us-east-1.amazonaws.com/test
+    description: Testing server
+  - url: https://0pgqwah7al.execute-api.us-east-1.amazonaws.com/v1
+    description: Production server
+tags:
+  # - name: Homni
+  #   description: Webhook endpoints for the Homni
+  - name: Whapi
+    description: Webhook endpoints for the Whapi
+  - name: Summit
+    description: Webhook endpoints for the Summit
+paths:
+  # /homni/followUp:
+  #   post:
+  #     tags:
+  #       - homni
+  #     summary: Homni - Create a new follow-up request
+  #     description: Webhook endpoint to create a new follow-up request in the Homni system.
+  #     operationId: homniCreateFollowUpRequest
+  #     requestBody:
+  #       description: Payload to create a new follow-up request
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               followUpId:
+  #                 type: string
+  #                 description: ID of the follow-up
+  #                 example: "12345"
+  #               details:
+  #                 type: string
+  #                 description: Details of the follow-up
+  #                 example: "Follow-up details"
+  #             required:
+  #               - followUpId
+  #     responses:
+  #       "200":
+  #         description: Follow-up request created successfully
+  #       "400":
+  #         description: Bad request
+  #       "500":
+  #         description: Internal server error
+
+  # /homni/lead:
+  #   post:
+  #     tags:
+  #       - homni
+  #     summary: Homni - Create a new lead
+  #     description: Webhook endpoint to create a new lead in the Homni system.
+  #     operationId: homniCreateLead
+  #     requestBody:
+  #       description: Payload to create a new lead
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               name:
+  #                 type: string
+  #                 description: Name of the lead
+  #                 example: John Doe
+  #               email:
+  #                 type: string
+  #                 description: Email address of the lead
+  #                 example: john.doe@example.com
+  #             required:
+  #               - name
+  #               - email
+  #     responses:
+  #       "200":
+  #         description: Lead created successfully
+  #       "400":
+  #         description: Bad request
+  #       "500":
+  #         description: Internal server error
+
+  # /homni/phase:
+  #   post:
+  #     tags:
+  #       - homni
+  #     summary: Homni - Create a new phase
+  #     description: Webhook endpoint to create a new phase in the Homni system.
+  #     operationId: homniCreatePhase
+  #     requestBody:
+  #       description: Payload to create a new phase
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               phaseId:
+  #                 type: string
+  #                 description: ID of the phase
+  #                 example: "phase123"
+  #               description:
+  #                 type: string
+  #                 description: Description of the phase
+  #                 example: "Phase description"
+  #             required:
+  #               - phaseId
+  #     responses:
+  #       "200":
+  #         description: Phase created successfully
+  #       "400":
+  #         description: Bad request
+  #       "500":
+  #         description: Internal server error
+
+  # /homni/responseRequest:
+  #   post:
+  #     tags:
+  #       - homni
+  #     summary: Homni - Create a new response request
+  #     description: Webhook endpoint to create a new response request in the Homni system.
+  #     operationId: homniCreateResponseRequest
+  #     requestBody:
+  #       description: Payload to create a new response request
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               requestId:
+  #                 type: string
+  #                 description: ID of the response request
+  #                 example: "req123"
+  #               content:
+  #                 type: string
+  #                 description: Content of the response request
+  #                 example: "Response content"
+  #             required:
+  #               - requestId
+  #     responses:
+  #       "200":
+  #         description: Response request created successfully
+  #       "400":
+  #         description: Bad request
+  #       "500":
+  #         description: Internal server error
+
+  # /homni/user:
+  #   post:
+  #     tags:
+  #       - homni
+  #     summary: Homni - Upsert a user
+  #     description: Webhook endpoint to create or update a user in the Homni system.
+  #     operationId: homniUpsertUser
+  #     requestBody:
+  #       description: Payload to upsert a user
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               userId:
+  #                 type: string
+  #                 description: ID of the user
+  #                 example: "user123"
+  #               name:
+  #                 type: string
+  #                 description: Name of the user
+  #                 example: Jane Doe
+  #             required:
+  #               - userId
+  #     responses:
+  #       "200":
+  #         description: User upserted successfully
+  #       "400":
+  #         description: Bad request
+  #       "500":
+  #         description: Internal server error
+
+  # /homni/threadSanitation:
+  #   post:
+  #     tags:
+  #       - homni
+  #     summary: Homni - Sanitize a thread
+  #     description: Webhook endpoint to sanitize a thread in the Homni system.
+  #     operationId: homniSanitizeThread
+  #     requestBody:
+  #       description: Payload to sanitize a thread
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               threadId:
+  #                 type: string
+  #                 description: ID of the thread
+  #                 example: "thread123"
+  #               action:
+  #                 type: string
+  #                 description: Action to perform on the thread
+  #                 example: "sanitize"
+  #             required:
+  #               - threadId
+  #     responses:
+  #       "200":
+  #         description: Thread sanitized successfully
+  #       "400":
+  #         description: Bad request
+  #       "500":
+  #         description: Internal server error
+
+  /whapi/message:
+    post:
+      tags:
+        - Whapi
+      summary: Whapi - Send message information
+      description: Webhook endpoint to send information about a WhatsApp message.
+      operationId: whapiSendMessage
+      requestBody:
+        description: Payload to send a new message
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                messageId:
+                  type: string
+                  description: ID of the message
+                  example: "msg123"
+                content:
+                  type: string
+                  description: Content of the message
+                  example: "Hello, world!"
+              required:
+                - messageId
+      responses:
+        "200":
+          description: Message processed successfully
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized - Invalid or missing bearer token
+        "403":
+          description: Forbidden - Access denied
+        "500":
+          description: Internal server error
+
+  /whapi/status:
+    post:
+      tags:
+        - Whapi
+      summary: Whapi - Update status of a WhatsApp Account
+      description: Webhook endpoint to update the status of a WhatsApp Account.
+      operationId: whapiUpdateStatus
+      requestBody:
+        description: Payload to update the status
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statusId:
+                  type: string
+                  description: ID of the status
+                  example: "status123"
+                state:
+                  type: string
+                  description: State of the status
+                  example: "active"
+              required:
+                - statusId
+      responses:
+        "200":
+          description: Status updated successfully
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized - Invalid or missing bearer token
+        "403":
+          description: Forbidden - Access denied
+        "500":
+          description: Internal server error
+
+  /summit/lead:
+    post:
+      tags:
+        - Summit
+      summary: Summit - Send Lead Updates
+      description: Webhook endpoint to send lead updates from Summit platform.
+      operationId: summitSendLeadUpdate
+      requestBody:
+        description: Payload to send a lead update with detailed lead information
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                created_at:
+                  type: [string]
+                  format: date-time
+                  description: Timestamp when the lead was created (string will be parsed to Date)
+                  example: "2024-01-15T10:30:00Z"
+                cnpj:
+                  type: [string, number]
+                  description: Brazilian company tax ID (accepts string or number, non-digits will be removed)
+                  example: "12345678000195"
+                selected_representative_code:
+                  type: [string, number]
+                  description: Code of the selected representative (optional, accepts string or number)
+                  example: 12345
+                contact_email_name:
+                  type: [string]
+                  description: Name associated with the contact email (optional)
+                  example: "John Doe"
+                contact_email_value:
+                  type: [string]
+                  format: email
+                  description: Email address of the lead contact (optional, must be valid email format)
+                  example: "john.doe@example.com"
+                contact_phone_value:
+                  type: [string, number]
+                  description: Phone number of the lead contact (optional, accepts string or number, non-digits removed, adds country code if needed)
+                  example: "+5511999999999 or (11) 99999-9999"
+                newsletter_accepted:
+                  type: [boolean, number, string, "null"]
+                  description: Whether the lead accepted to receive newsletters (optional, accepts boolean, number 0/1, string "true/false" or "0/1")
+                  example: true
+                step:
+                  type: [string]
+                  enum:
+                    - "REPRESENTATIVE_SELECTION"
+                    - "REPRESENTATIVE_VALIDATION"
+                    - "BP_CODE_VALIDATION"
+                    - "OTP_VALIDATION"
+                    - "EMAIL_VALIDATION"
+                    - "CREATE_PASSWORD"
+                    - "ACCOUNT_CREATED"
+                    - "CNPJ_VALIDATION"
+                  description: Current step in the Summit registration process (accepts string enum values)
+                  example: "REPRESENTATIVE_SELECTION"
+              required:
+                - created_at
+                - cnpj
+                - step
+      responses:
+        "200":
+          description: Summit lead processed successfully
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized - Invalid or missing bearer token
+        "403":
+          description: Forbidden - Access denied
+        "500":
+          description: Internal server error
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT Bearer token authentication. 
+
+        **How to use:**
+        1. Click the "Authorize" button above
+        2. Enter your bearer token in the format: `your-jwt-token-here`
+        3. Click "Authorize" to apply the token to all requests
+
+        **Header Example:**
+        ```
+        Authorization: Bearer eyJhbGciOi... (your JWT token here)
+        ```
+
+        **Note:** Do not include the word "Bearer" in the token field below - just the token itself.
+
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Unauthorized"
+              message:
+                type: string
+                example: "Invalid or missing bearer token"
+
+    ForbiddenError:
+      description: Access denied - insufficient permissions
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Forbidden"
+              message:
+                type: string
+                example: "Access denied: User ID mismatch"
+
+security:
+  - BearerAuth: []
