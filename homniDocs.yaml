@@ -469,7 +469,7 @@ paths:
                 cartId:
                   type: [string, number]
                   description: cart ID (accepts string or number)
-                  example: "112233"
+                  example: "cart_12345"
               required:
                 - codSap
                 - representativeId
