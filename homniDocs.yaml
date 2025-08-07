@@ -387,7 +387,7 @@ paths:
                   type: [string, number]
                   description: ID of the cart (accepts string or number, extracts digits only)
                   example: "cart_12345"
-                clientId:
+                codSap:
                   type: [string, number]
                   description: SAP code associated with the cart (optional, accepts string or number)
                   example: 67890
@@ -420,7 +420,7 @@ paths:
             schema:
               type: object
               properties:
-                clientId:
+                codSap:
                   type: [string, number]
                   description: SAP code (accepts string or number)
                   example: "12345"
@@ -429,7 +429,7 @@ paths:
                   description: Representative code (accepts string or number)
                   example: "67890"
               required:
-                - clientId
+                - codSap
                 - representativeId
       responses:
         "200":
@@ -458,7 +458,7 @@ paths:
             schema:
               type: object
               properties:
-                clientId:
+                codSap:
                   type: [string, number]
                   description: SAP code (accepts string or number)
                   example: "12345"
@@ -471,7 +471,7 @@ paths:
                   description: cart ID (accepts string or number)
                   example: "112233"
               required:
-                - clientId
+                - codSap
                 - representativeId
                 - cartId
       responses:
