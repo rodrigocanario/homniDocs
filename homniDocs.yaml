@@ -317,11 +317,11 @@ paths:
                 cnpj:
                   type: [string, number]
                   description: Brazilian company tax ID (accepts string or number, non-digits will be removed)
-                  example: "12345678000195"
+                  example: "01.234.567/0001-89"
                 selected_representative_code:
                   type: [string, number]
                   description: Code of the selected representative (optional, accepts string or number)
-                  example: 12345
+                  example: "12345"
                 contact_email_name:
                   type: [string]
                   description: Name associated with the contact email (optional)
@@ -334,7 +334,7 @@ paths:
                 contact_phone_value:
                   type: [string, number]
                   description: Phone number of the lead contact (optional, accepts string or number, non-digits removed, adds country code if needed)
-                  example: "+5511999999999 or (11) 99999-9999"
+                  example: "(11) 99999-9999"
                 newsletter_accepted:
                   type: [boolean, number, string, "null"]
                   description: Whether the lead accepted to receive newsletters (optional, accepts boolean, number 0/1, string "true/false" or "0/1")
@@ -387,7 +387,7 @@ paths:
                   type: [string, number]
                   description: ID of the cart (accepts string or number, extracts digits only)
                   example: "cart_12345"
-                codSap:
+                clientId:
                   type: [string, number]
                   description: SAP code associated with the cart (optional, accepts string or number)
                   example: 67890
@@ -396,6 +396,87 @@ paths:
       responses:
         "200":
           description: Summit cart processed successfully
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized - Invalid or missing bearer token
+        "403":
+          description: Forbidden - Access denied
+        "500":
+          description: Internal server error
+
+  /summit/login:
+    post:
+      tags:
+        - Summit
+      summary: Summit - Login
+      description: Webhook endpoint to handle Summit login events.
+      operationId: summitLogin
+      requestBody:
+        description: Payload for Summit login
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientId:
+                  type: [string, number]
+                  description: SAP code (accepts string or number)
+                  example: "12345"
+                representativeId:
+                  type: [string, number]
+                  description: Representative code (accepts string or number)
+                  example: "67890"
+              required:
+                - clientId
+                - representativeId
+      responses:
+        "200":
+          description: Summit login processed successfully
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized - Invalid or missing bearer token
+        "403":
+          description: Forbidden - Access denied
+        "500":
+          description: Internal server error
+
+  /summit/checkout:
+    post:
+      tags:
+        - Summit
+      summary: Summit - Checkout
+      description: Webhook endpoint to handle Summit checkout events.
+      operationId: summitCheckout
+      requestBody:
+        description: Payload for Summit checkout
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientId:
+                  type: [string, number]
+                  description: SAP code (accepts string or number)
+                  example: "12345"
+                representativeId:
+                  type: [string, number]
+                  description: Representative code (accepts string or number)
+                  example: "67890"
+                cartId:
+                  type: [string, number]
+                  description: cart ID (accepts string or number)
+                  example: "112233"
+              required:
+                - clientId
+                - representativeId
+                - cartId
+      responses:
+        "200":
+          description: Summit checkout processed successfully
         "400":
           description: Bad request
         "401":
