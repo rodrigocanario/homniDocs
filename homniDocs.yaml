@@ -9,9 +9,9 @@ externalDocs:
 servers:
   - url: http://localhost:3000/dev
     description: Local development server
-  - url: https://wnzq02zta5.execute-api.us-east-1.amazonaws.com/test
+  - url: https://wnr0sswcaa.execute-api.us-east-1.amazonaws.com/staging
     description: Testing server
-  - url: https://0pgqwah7al.execute-api.us-east-1.amazonaws.com/v1
+  - url: https://sibji35foa.execute-api.us-east-1.amazonaws.com/v1
     description: Production server
 tags:
   # - name: Homni
@@ -309,7 +309,7 @@ paths:
             schema:
               type: object
               properties:
-                created_at:
+                createdAt:
                   type: [string]
                   format: date-time
                   description: Timestamp when the lead was created (string will be parsed to Date)
@@ -318,42 +318,73 @@ paths:
                   type: [string, number]
                   description: Brazilian company tax ID (accepts string or number, non-digits will be removed)
                   example: "01.234.567/0001-89"
-                selected_representative_code:
-                  type: [string, number]
-                  description: Code of the selected representative (optional, accepts string or number)
-                  example: "12345"
-                contact_email_name:
+                step:
+                  type: [string]
+                  enum:
+                    - "CNPJ_VALIDATION"
+                    - "CONTACT_VALIDATION"
+                    - "SALES_REPRESENTATIVE_SELECTION"
+                    - "LEGAL_REPRESENTATIVE_VALIDATION"
+                    - "BP_CODE_VALIDATION"
+                    - "OTP_VALIDATION"
+                    - "ACCOUNT_CREATED"
+                  description: Current step in the Summit registration process (accepts string enum values)
+                  example: "REPRESENTATIVE_SELECTION"
+                newCustomer:
+                  type: [boolean, number, string, "null"]
+                  description: Whether the lead is a new customer (optional, accepts boolean, number 0/1, string "true/false" or "0/1")
+                  example: true
+                contactName:
                   type: [string]
                   description: Name associated with the contact email (optional)
                   example: "John Doe"
-                contact_email_value:
+                contactEmail:
                   type: [string]
                   format: email
                   description: Email address of the lead contact (optional, must be valid email format)
                   example: "john.doe@example.com"
-                contact_phone_value:
+                contactPhoneNumber:
                   type: [string, number]
                   description: Phone number of the lead contact (optional, accepts string or number, non-digits removed, adds country code if needed)
                   example: "(11) 99999-9999"
-                newsletter_accepted:
+                newsletterSubscription:
                   type: [boolean, number, string, "null"]
                   description: Whether the lead accepted to receive newsletters (optional, accepts boolean, number 0/1, string "true/false" or "0/1")
                   example: true
-                step:
-                  type: [string]
-                  enum:
-                    - "REPRESENTATIVE_SELECTION"
-                    - "REPRESENTATIVE_VALIDATION"
-                    - "BP_CODE_VALIDATION"
-                    - "OTP_VALIDATION"
-                    - "EMAIL_VALIDATION"
-                    - "CREATE_PASSWORD"
-                    - "ACCOUNT_CREATED"
-                    - "CNPJ_VALIDATION"
-                  description: Current step in the Summit registration process (accepts string enum values)
-                  example: "REPRESENTATIVE_SELECTION"
+                salesRepresentative:
+                  type: object
+                  description: Information about the sales representative
+                  properties:
+                    code:
+                      type: [string, integer]
+                      description: Code of the sales representative
+                      example: 12345
+                    contactName:
+                      type: string
+                      description: Name of the sales representative
+                      example: "Jane Doe"
+                    companyName:
+                      type: string
+                      description: Company name of the sales representative
+                      example: "ABC Corp"
+                    alternativeDescription:
+                      type: string
+                      description: Alternative description for the representative
+                      example: "Regional Manager"
+                    email:
+                      type: string
+                      description: String of email addresses of the representatives separated by commas
+                      example: "rep@example.com, rep2@example.com"
+                    phoneNumber:
+                      type: [string, number]
+                      description: Phone number of the representative (optional, accepts string or number, non-digits removed, adds country code if needed)
+                      example: "(11) 99999-9999"
+                    uf:
+                      type: string
+                      description: State abbreviation of the representative
+                      example: "SP"
               required:
-                - created_at
+                - createdAt
                 - cnpj
                 - step
       responses:
@@ -387,7 +418,7 @@ paths:
                   type: [string, number]
                   description: ID of the cart (accepts string or number, extracts digits only)
                   example: "cart_12345"
-                codSap:
+                customerId:
                   type: [string, number]
                   description: SAP code associated with the cart (optional, accepts string or number)
                   example: 67890
