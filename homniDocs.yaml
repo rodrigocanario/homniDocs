@@ -8,9 +8,11 @@ externalDocs:
   url: https://www.canva.com/design/DAGmlmkqgRY/CgiWHirMvYzW_yD7pLQu1A/edit
 servers:
   - url: http://localhost:3000/dev
-    description: Local development server
+    description: Local server
+  - url: https://9iihj065oc.execute-api.us-east-1.amazonaws.com/dev
+    description: Development server
   - url: https://wnr0sswcaa.execute-api.us-east-1.amazonaws.com/staging
-    description: Testing server
+    description: Staging server
   - url: https://sibji35foa.execute-api.us-east-1.amazonaws.com/v1
     description: Production server
 tags:
@@ -329,7 +331,7 @@ paths:
                     - "OTP_VALIDATION"
                     - "ACCOUNT_CREATED"
                   description: Current step in the Summit registration process (accepts string enum values)
-                  example: "REPRESENTATIVE_SELECTION"
+                  example: "SALES_REPRESENTATIVE_SELECTION"
                 newCustomer:
                   type: [boolean, number, string, "null"]
                   description: Whether the lead is a new customer (optional, accepts boolean, number 0/1, string "true/false" or "0/1")
@@ -373,8 +375,8 @@ paths:
                       example: "Regional Manager"
                     email:
                       type: string
-                      description: String of email addresses of the representatives separated by commas
-                      example: "rep@example.com, rep2@example.com"
+                      description: String of email addresses of the representatives separated by semicolons
+                      example: "rep@example.com; rep2@example.com"
                     phoneNumber:
                       type: [string, number]
                       description: Phone number of the representative (optional, accepts string or number, non-digits removed, adds country code if needed)
