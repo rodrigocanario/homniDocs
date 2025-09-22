@@ -453,17 +453,33 @@ paths:
             schema:
               type: object
               properties:
-                codSap:
+                customerCode:
                   type: [string, number]
-                  description: SAP code (accepts string or number)
+                  description: Customer code
                   example: "12345"
-                representativeId:
+                salesRepresentativeCode:
                   type: [string, number]
-                  description: Representative code (accepts string or number)
+                  description: Sales representative code
                   example: "67890"
+                name:
+                  type: string
+                  description: Customer name (processed as lowercase)
+                  example: "John Doe"
+                email:
+                  type: string
+                  format: email
+                  description: Customer email address
+                  example: "customer@example.com"
+                phoneNumber:
+                  type: [string, number]
+                  description: Customer phone number
+                  example: "5511987654321"
               required:
-                - codSap
-                - representativeId
+                - customerCode
+                - salesRepresentativeCode
+                - name
+                - email
+                - phoneNumber
       responses:
         "200":
           description: Summit login processed successfully
